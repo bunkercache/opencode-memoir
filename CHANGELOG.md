@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.1](https://github.com/bunkercache/opencode-memoir/compare/v0.2.0...v0.2.1) (2025-12-28)
+
+
+### Bug Fixes
+
+* correct repository name in release workflow and docs URLs ([#27](https://github.com/bunkercache/opencode-memoir/issues/27)) ([b87e466](https://github.com/bunkercache/opencode-memoir/commit/b87e466d61b2524f53fde47cb2e22d351759d0d3))
+* skip prereleases in docs workflow and update base URL ([#26](https://github.com/bunkercache/opencode-memoir/issues/26)) ([714babd](https://github.com/bunkercache/opencode-memoir/commit/714babd945ef780086c3e0f87bb2d8b752357a62))
+
+
+### Miscellaneous
+
+* rename package to @bunkercache/opencode-memoir ([#25](https://github.com/bunkercache/opencode-memoir/issues/25)) ([8e21b00](https://github.com/bunkercache/opencode-memoir/commit/8e21b003930a1bbd21448fab92629f623934df80))
+
 ## [0.2.0](https://github.com/bunkercache/opencode-memoir/compare/v0.1.0...v0.2.0) (2025-12-28)
 
 
