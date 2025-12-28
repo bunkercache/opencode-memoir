@@ -116,12 +116,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION="${{ steps.published.outputs.version }}"
+          BASE_VERSION="${{ steps.base-version.outputs.version }}"
           PR_NUMBER="${{ steps.inputs.outputs.pr_number }}"
 
           # Extract changelog from the release PR body
-          # Remove everything after the first "---" divider (footer with checkbox)
+          # - Remove everything after the first "---" divider (footer with checkbox)
+          # - Replace base version (e.g., 0.2.0) with full prerelease version (e.g., 0.2.0-next.1)
           PR_BODY=$(gh pr view "${PR_NUMBER}" --repo "${{ github.repository }}" --json body -q '.body')
-          CHANGELOG=$(echo "$PR_BODY" | sed '/^---$/,$d')
+          CHANGELOG=$(echo "$PR_BODY" | sed '/^---$/,$d' | sed "s/${BASE_VERSION}/${VERSION}/g")
 
           # Create prerelease with the cleaned changelog
           gh release create "v${VERSION}" \
