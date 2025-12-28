@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/bunkercache/opencode-memoir/compare/v0.3.0...v0.3.1) (2025-12-28)
+
+
+### Bug Fixes
+
+* prevent cross-session history injection ([#36](https://github.com/bunkercache/opencode-memoir/issues/36)) ([e21723b](https://github.com/bunkercache/opencode-memoir/commit/e21723b020f753776da96f33108067abb02afa2f))
+
 ## [0.3.0](https://github.com/bunkercache/opencode-memoir/compare/v0.2.3...v0.3.0) (2025-12-28)
 
 
