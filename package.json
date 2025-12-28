@@ -4,7 +4,7 @@
   "description": "A smart memory management plugin for OpenCode that supports nested aggregation of memory, summaries, and file changes that compact in layers with upstream references for lookups.",
   "author": {
     "name": "Chris Tunbridge",
-    "email": "967304+Destreyf@users.noreply.github.com"
+    "email": "Destreyf@users.noreply.github.com"
   },
   "type": "module",
   "exports": {
