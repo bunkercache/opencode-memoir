@@ -312,46 +312,46 @@
   },
   "examples": [
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "storage": {
         "directory": "local"
       }
     },
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "storage": {
         "directory": "local",
         "gitignore": false
       }
     },
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "storage": {
         "directory": ".memoir"
       }
     },
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "storage": {
         "directory": "local",
         "filename": { "memory": "memories.db", "history": "history.db" }
       }
     },
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "storage": {
         "filename": { "memory": "memory.db" }
       }
     },
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "storage": {
         "filename": { "memory": "memories.db", "history": "history.db" },
         "gitignore": { "memory": false, "history": true }
       }
     },
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "search": {
         "mode": "vector",
         "embedding": {
@@ -361,7 +361,7 @@
       }
     },
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "search": {
         "mode": "vector",
         "embedding": {
@@ -371,7 +371,7 @@
       }
     },
     {
-      "$schema": "https://bunkercache.github.io/memoir/schema/config.json",
+      "$schema": "https://bunkercache.github.io/opencode-memoir/schema/config.json",
       "memory": {
         "maxInject": 15,
         "keywordDetection": true,
