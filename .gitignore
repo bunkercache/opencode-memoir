@@ -9,4 +9,9 @@ coverage/
 .eslintcache
 .bun/
 .bun.lockb
-.memory/
+
+# Local OpenCode plugin for development testing
+.opencode/plugin/
+
+# Memoir plugin databases
+.opencode/memoir/memory.db

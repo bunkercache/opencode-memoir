@@ -5,7 +5,7 @@ import eslintPluginPrettier from 'eslint-plugin-prettier';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', '*.config.js'],
+    ignores: ['dist', 'node_modules', '*.config.js', '.opencode'],
   },
   {
     files: ['**/*.ts'],
@@ -24,6 +24,7 @@ export default tseslint.config(
         Buffer: 'readonly',
         // Bun globals
         Bun: 'readonly',
+        AbortController: 'readonly',
       },
     },
     plugins: {
