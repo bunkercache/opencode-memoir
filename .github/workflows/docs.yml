@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to publish (e.g., v1.0.0, dev)'
+        description: 'Version to publish (e.g., v1.0.0, dev, latest)'
         required: false
         default: 'dev'
 
@@ -30,6 +30,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Skip prereleases - only build docs for stable releases
+    if: |
+      github.event_name != 'release' ||
+      !github.event.release.prerelease
     steps:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -44,23 +48,30 @@ jobs:
       - name: Determine version
         id: version
         run: |
-          # Release event → use tag name (e.g., v1.0.0)
-          # Push to main → dev (unreleased development docs)
-          # Manual dispatch → use provided version
           if [[ "${{ github.event_name }}" == "release" ]]; then
+            # Stable release → create versioned docs AND update latest
             VERSION="${{ github.event.release.tag_name }}"
             IS_LATEST="true"
           elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             VERSION="${{ github.event.inputs.version }}"
-            IS_LATEST="false"
+            # Only set is_latest if explicitly requesting "latest"
+            if [[ "$VERSION" == "latest" ]]; then
+              IS_LATEST="true"
+              # Get the latest release tag for the actual version
+              VERSION=$(gh release list --exclude-pre-releases --limit 1 --json tagName -q '.[0].tagName')
+            else
+              IS_LATEST="false"
+            fi
           else
-            # Push to main branch = dev docs
+            # Push to main branch = dev docs only
             VERSION="dev"
             IS_LATEST="false"
           fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "is_latest=$IS_LATEST" >> $GITHUB_OUTPUT
           echo "Publishing docs for version: $VERSION (is_latest: $IS_LATEST)"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
@@ -84,7 +95,7 @@ jobs:
       - name: Generate docs
         env:
           DOCS_VERSION: ${{ steps.version.outputs.version }}
-          DOCS_BASE_URL: https://bunkercache.github.io/memoir
+          DOCS_BASE_URL: https://bunkercache.github.io/opencode-memoir
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           IS_LATEST="${{ steps.version.outputs.is_latest }}"
@@ -96,14 +107,14 @@ jobs:
           rm -rf "_site/$VERSION"
           mv dist-docs "_site/$VERSION"
 
-          # If this is a release, also update /latest/ to point to this version
+          # If this is a stable release, also update /latest/
           if [[ "$IS_LATEST" == "true" ]]; then
             rm -rf "_site/latest"
             cp -r "_site/$VERSION" "_site/latest"
-            
+
             # Update the $id in latest to say "latest" not the version
             sed -i "s|/$VERSION/schema|/latest/schema|g" "_site/latest/schema/config.schema.json"
-            
+
             # Also copy to root for default access
             cp "_site/latest/index.html" "_site/"
             cp -r "_site/latest/schema" "_site/"
@@ -112,7 +123,7 @@ jobs:
       - name: Update versions.json
         run: |
           # Build versions.json with proper sorting:
-          # 1. latest (alias for most recent release)
+          # 1. latest (alias for most recent stable release)
           # 2. dev (main branch, unreleased)
           # 3. Versioned releases in descending order (v1.1.0, v1.0.0, ...)
 
@@ -132,8 +143,8 @@ jobs:
             FIRST=false
           fi
 
-          # Then versioned releases (sorted descending)
-          for v in $(ls -d _site/v* 2>/dev/null | xargs -n1 basename 2>/dev/null | sort -rV); do
+          # Then versioned releases (sorted descending, excluding prereleases)
+          for v in $(ls -d _site/v* 2>/dev/null | xargs -n1 basename 2>/dev/null | grep -v '\-' | sort -rV); do
             if [[ "$FIRST" != "true" ]]; then echo "," >> _site/versions.json; fi
             echo "  \"$v\"" >> _site/versions.json
             FIRST=false
