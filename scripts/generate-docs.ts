@@ -23,7 +23,7 @@ const SCHEMA_PATH = join(ROOT, 'schema', 'config.schema.json');
 const README_PATH = join(ROOT, 'README.md');
 const PACKAGE_PATH = join(ROOT, 'package.json');
 
-const BASE_URL = process.env.DOCS_BASE_URL || 'https://bunkercache.github.io/memoir';
+const BASE_URL = process.env.DOCS_BASE_URL || 'https://bunkercache.github.io/opencode-memoir';
 const VERSION = process.env.DOCS_VERSION || 'dev';
 
 // =============================================================================
