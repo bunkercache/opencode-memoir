@@ -11,7 +11,30 @@
 
 import { tool } from '@opencode-ai/plugin';
 import { getMemoryService } from '../memory/index.ts';
+import { getOpenCodeClient } from '../hooks/events.ts';
 import type { MemoryType } from '../types.ts';
+
+/**
+ * Shows a toast notification in the TUI.
+ *
+ * @param message - The message to display
+ * @param variant - The toast variant (success, error, info, warning)
+ */
+async function showToast(
+  message: string,
+  variant: 'success' | 'error' | 'info' | 'warning' = 'info'
+): Promise<void> {
+  const client = getOpenCodeClient();
+  if (!client?.tui?.showToast) {
+    return;
+  }
+
+  try {
+    await client.tui.showToast({ body: { message, variant } });
+  } catch {
+    // Silently fail if toast can't be shown
+  }
+}
 
 /** Help text displayed when mode is 'help' or not provided */
 const HELP_TEXT = `Memoir Tool - Manage project memories
@@ -90,6 +113,12 @@ export const memoirTool = tool({
         }
 
         const memory = memoryService.add(args.content, args.type as MemoryType, { source: 'user' });
+
+        // Show toast notification
+        const truncatedContent =
+          memory.content.length > 50 ? `${memory.content.slice(0, 50)}...` : memory.content;
+        await showToast(`Memory saved: ${truncatedContent}`, 'success');
+
         return JSON.stringify({
           success: true,
           memory: {
