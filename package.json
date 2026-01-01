@@ -28,13 +28,13 @@
     "dist"
   ],
   "dependencies": {
-    "@opencode-ai/plugin": "1.0.204",
+    "@opencode-ai/plugin": "1.0.223",
     "sqlite-vec": "^0.1.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@typescript-eslint/eslint-plugin": "8.50.1",
-    "@typescript-eslint/parser": "8.50.1",
+    "@typescript-eslint/eslint-plugin": "8.51.0",
+    "@typescript-eslint/parser": "8.51.0",
     "bun-types": "latest",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "10.1.8",
