@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.4.1](https://github.com/bunkercache/opencode-memoir/compare/v0.4.0...v0.4.1) (2026-01-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @opencode-ai/plugin to v1.0.223 ([#41](https://github.com/bunkercache/opencode-memoir/issues/41)) ([76a13f0](https://github.com/bunkercache/opencode-memoir/commit/76a13f09342a481bab2ec87bdbd6f67af9c591c3))
+
+
+### Miscellaneous
+
+* **deps:** update dependency usage to v2.11.0 ([#43](https://github.com/bunkercache/opencode-memoir/issues/43)) ([627bef1](https://github.com/bunkercache/opencode-memoir/commit/627bef1b6c8a382171103394a9c8dc9fd37128f0))
+* **deps:** update sst/opencode action to v1.0.222 ([#40](https://github.com/bunkercache/opencode-memoir/issues/40)) ([2ba5162](https://github.com/bunkercache/opencode-memoir/commit/2ba516298082dd5895632d6d028465c671a93d7b))
+* **deps:** update typescript-eslint monorepo to v8.51.0 ([#42](https://github.com/bunkercache/opencode-memoir/issues/42)) ([79dcc16](https://github.com/bunkercache/opencode-memoir/commit/79dcc1605dc05d2e35624542004add06614512f5))
+
 ## [0.4.0](https://github.com/bunkercache/opencode-memoir/compare/v0.3.1...v0.4.0) (2025-12-28)
 
 
